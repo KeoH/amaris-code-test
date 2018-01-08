@@ -118,3 +118,47 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Logging
+ACCESS_LOG = os.path.join(BASE_DIR, '../../logs/django.access.log')
+TEST_LOG = os.path.join(BASE_DIR, '../../logs/django.test.log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[%(levelname)s][%(asctime)s]:: %(message)s'
+        }
+    },
+    'handlers': {
+        'access': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': ACCESS_LOG,
+            'maxBytes': 1024 * 1024 * 1,
+            'backupCount': 4,
+            'formatter': 'standard',
+        },
+        'test': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': TEST_LOG,
+            'maxBytes': 1024 * 1024 * 1,
+            'backupCount': 4,
+            'formatter': 'standard',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['access'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'test': {
+            'handlers': ['test'],
+            'level': 'DEBUG'
+        }
+    }
+}
+
