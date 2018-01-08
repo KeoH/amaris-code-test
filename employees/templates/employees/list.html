@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% block title %}Employee list{% endblock %} {% block content %}
+<h1>Employees</h1>
+{% if user.is_boss %}
+<div>
+    <a href="/employees/add/" class="btn btn-primary">+ Employee</a>
+</div>
+{% endif %}
+<h3>Bosses</h3>
+<p>Average Age: {{ bosses_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Departament</th>
+            <th># of subordinates</th>
+            <th>Info</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for boss in bosses %}
+        <tr>
+            <td>{{boss.username}}</td>
+            <td>{{boss.first_name}}</td>
+            <td>{{boss.last_name}}</td>
+            <td>{{boss.age}}</td>
+            <td>{{boss.get_departament_display}}</td>
+            <td>{{boss.subordinates.all.count}}</td>
+            <td>
+                {% if boss.is_traveling %}
+                    <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if boss.is_promoted %}
+                    <span class="badge badge-info">Promoted</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Tecnics</h3>
+<p>Average Age: {{ tecnics_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Departament</th>
+            <th># of subordinates</th>
+            <th>Info</th>            
+        </tr>
+    </thead>
+    <tbody>
+        {% for tecnic in tecnics %}
+        <tr>
+            <td>{{tecnic.username}}</td>
+            <td>{{tecnic.first_name}}</td>
+            <td>{{tecnic.last_name}}</td>
+            <td>{{tecnic.age}}</td>
+            <td>{{tecnic.get_departament_display}}</td>
+            <td>{{tecnic.subordinates.all.count}}</td>
+            <td>
+                {% if tecnic.is_traveling %}
+                <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if tecnic.is_promoted %}
+                    <span class="badge badge-warning">Promoted</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Students</h3>
+<p>Average Age: {{ students_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Departament</th>
+            <th>Info</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{student.username}}</td>
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.get_departament_display}}</td>
+            <td>
+                {% if student.is_traveling %}
+                    <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if student.is_promoted %}
+                    <span class="badge badge-info">Promoted</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
