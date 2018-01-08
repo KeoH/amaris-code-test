@@ -13,7 +13,9 @@ SECRET_KEY = 'b-aegl@%#114(h1bn%l#v2%!u2t+f2_7$v1da0)r$s&0v&044-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
