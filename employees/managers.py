@@ -13,4 +13,8 @@ class EmployeeManager(models.UserManager):
         total = 0
         for empleyee in queryset:
             total += empleyee.age
-        return total/queryset.count()
+        try:
+            return total/queryset.count()
+        except ZeroDivisionError:
+            return 0
+        
