@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-10 03:14+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/settings/base.py:54
+msgid "LG:SPANISH"
+msgstr "Español"
+
+#: core/settings/base.py:55
+msgid "LG:ENGLISH"
+msgstr "Inglés"
+
+#: employees/admin.py:10
+msgid "TX::Employees"
+msgstr "Empleados"
+
+#: employees/choices.py:5
+msgid "ET::BOSS"
+msgstr "Responsable"
+
+#: employees/choices.py:6
+msgid "ET::TECNIC"
+msgstr "Tecnico"
+
+#: employees/choices.py:7
+msgid "ET::STUDENT"
+msgstr "Estudiante"
+
+#: employees/choices.py:11
+msgid "DT::ADMINISTRATION"
+msgstr "Administración"
+
+#: employees/choices.py:12
+msgid "DT::PROGRAMMING"
+msgstr "Programación"
+
+#: employees/choices.py:13
+msgid "DT::COMMERCE"
+msgstr "Comercial"
+
+#: employees/models.py:15
+msgid "FI::DEPARTAMENT"
+msgstr "Departamento"
+
+#: employees/models.py:18
+msgid "FI::ROLE"
+msgstr "Puesto"
+
+#: employees/models.py:22
+msgid "FI::BOSS"
+msgstr "Responsable"
+
+#: employees/models.py:23
+msgid "FI::HIRED_DATE"
+msgstr "Fecha de contratación"
+
+#: employees/models.py:24
+msgid "FI::IS_HIRED"
+msgstr "esta contratado"
+
+#: employees/models.py:25
+msgid "FI::IS_TRAVELING"
+msgstr "esta de viaje"
+
+#: employees/models.py:26
+msgid "FI::TRAVELING_DATA"
+msgstr "Información de viaje"
+
+#: employees/models.py:27
+msgid "FI:BIRTHDATE"
+msgstr "Cumpleaños"

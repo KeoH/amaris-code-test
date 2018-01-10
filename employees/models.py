@@ -1,7 +1,7 @@
 from datetime import timedelta, date
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.contrib.postgres.fields import JSONField
 
@@ -29,8 +29,11 @@ class Employee(AbstractUser):
     objects = UserManager()
     employees = EmployeeManager()
     
+    def __str__(self):
+        return '{} : {} {}'.format(self.username, self.first_name, self.last_name)
+
     def promote(self):
-        if not self.is_promoted():
+        if not self.is_promoted:
             data = self.traveling_data
             data['promote'] = data.get('promote', {'old_role':self.role, 'promotions':[]})
             data.get('promote').get('promotions').append(
@@ -42,7 +45,7 @@ class Employee(AbstractUser):
             self.save()
 
     def permanent_promote(self):
-        if not self.is_promoted():
+        if not self.is_promoted:
             self.role = str(int(self.role) - 1) if int(self.role) > 1 else '1'
             if self.boss and self.boss.boss:
                 self.boss = self.boss.boss
@@ -84,26 +87,29 @@ class Employee(AbstractUser):
         self.boss = None
         self.save()
 
+    @property
     def has_promoted(self):
         if self.traveling_data.get('promote'):
             return True
         return False
 
+    @property
     def is_promoted(self):
-        if self.has_promoted():
+        if self.has_promoted:
             return self.role != self.traveling_data.get('promote').get('old_role')
         return False
 
     def unpromote(self):
-        if self.has_promoted():
+        if self.has_promoted:
             self.role = self.traveling_data.get('promote').get('old_role')
             data = self.traveling_data
             data.get('promote').get('promotions')[-1]['end_date'] = timezone.now().strftime('%d/%m/%Y')
             self.traveling_data = data
             self.save()
 
+    @property
     def times_promoted(self):
-        if not self.has_promoted():
+        if not self.has_promoted:
             return 0
         return len(self.traveling_data.get('promote').get('promotions', []))
 

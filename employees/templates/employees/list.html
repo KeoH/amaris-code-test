@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% block title %}Employee list{% endblock %} {% block content %}
 <h1>Employees</h1>
 {% if user.is_boss %}
-<div>
-    <a href="/employees/add/" class="btn btn-primary">+ Employee</a>
-</div>
+    <div>
+        <a href="/employees/add/" class="btn btn-primary">+ Employee</a>
+    </div>
 {% endif %}
 <h3>Bosses</h3>
 <p>Average Age: {{ bosses_age|floatformat:2 }} years old</p>
@@ -17,6 +17,9 @@
             <th>Departament</th>
             <th># of subordinates</th>
             <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -36,6 +39,7 @@
                     <span class="badge badge-info">Promoted</span>
                 {% endif %}
             </td>
+            {% include 'employees/partials/actions.html' with employee=boss %}
         </tr>
         {% endfor %}
     </tbody>
@@ -52,7 +56,10 @@
             <th>Age</th>
             <th>Departament</th>
             <th># of subordinates</th>
-            <th>Info</th>            
+            <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}          
         </tr>
     </thead>
     <tbody>
@@ -72,6 +79,7 @@
                     <span class="badge badge-warning">Promoted</span>
                 {% endif %}
             </td>
+            {% include 'employees/partials/actions.html' with employee=tecnic %}            
         </tr>
         {% endfor %}
     </tbody>
@@ -88,6 +96,9 @@
             <th>Age</th>
             <th>Departament</th>
             <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -106,6 +117,7 @@
                     <span class="badge badge-info">Promoted</span>
                 {% endif %}
             </td>
+            {% include 'employees/partials/actions.html' with employee=student %}
         </tr>
         {% endfor %}
     </tbody>

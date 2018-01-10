@@ -4,6 +4,9 @@
 
 {% block content %}
     <h1>Login</h1>
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
     <form action="" method="POST">
         {% csrf_token %}
         <label for="username">Username</label>
