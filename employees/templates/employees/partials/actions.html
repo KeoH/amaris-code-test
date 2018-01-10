@@ -1,9 +1,9 @@
 {% if user.is_boss %}
 <td>
     {% if employee.is_traveling %}
-        <a class="btn btn-secundary" href="#">End travel</a>
+        <a class="btn btn-secundary" href="{% url 'end_travel' employee.pk %}">End travel</a>
     {% else %}
-        <a class="btn btn-secundary" href="#">Go travel</a>
+        <a class="btn btn-secundary" href="{% url 'go_travel' employee.pk %}">Go travel</a>
     {% endif %}
 </td>
 {% endif %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %} {% block title %}Departament list{% endblock %} {% block content %}
+<h1>Departaments</h1>
+{% if user.is_boss %}
+    <div>
+        <a href="/employees/add/" class="btn btn-primary">+ Employee</a>
+    </div>
+{% endif %}
+<h3>Administration</h3>
+<p>Average Age: {{ administration_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th># of subordinates</th>
+            <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in administration %}
+        <tr>
+            <td>{{employee.username}}</td>
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.age}}</td>
+            <td>{{employee.get_role_display}}</td>
+            <td>{{employee.subordinates.all.count}}</td>
+            <td>
+                {% if employee.is_traveling %}
+                    <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if employee.is_promoted %}
+                    <span class="badge badge-info">Promoted</span>
+                {% endif %}
+            </td>
+            {% include 'employees/partials/actions.html' with employee=employee %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Programming</h3>
+<p>Average Age: {{ programming_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th># of subordinates</th>
+            <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}          
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in programming %}
+        <tr>
+            <td>{{employee.username}}</td>
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.age}}</td>
+            <td>{{employee.get_role_display}}</td>
+            <td>{{employee.subordinates.all.count}}</td>
+            <td>
+                {% if employee.is_traveling %}
+                <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if employee.is_promoted %}
+                    <span class="badge badge-warning">Promoted</span>
+                {% endif %}
+            </td>
+            {% include 'employees/partials/actions.html' with employee=employee %}            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Comercial</h3>
+<p>Average Age: {{ comercial_age|floatformat:2 }} years old</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Info</th>
+            {% if user.is_boss %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in comercial %}
+        <tr>
+            <td>{{employee.username}}</td>
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.age}}</td>
+            <td>{{employee.get_role_display}}</td>
+            <td>
+                {% if employee.is_traveling %}
+                    <span class="badge badge-info">Traveling</span>
+                {% endif %}
+                {% if employee.is_promoted %}
+                    <span class="badge badge-info">Promoted</span>
+                {% endif %}
+            </td>
+            {% include 'employees/partials/actions.html' with employee=employee %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

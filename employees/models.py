@@ -116,6 +116,7 @@ class Employee(AbstractUser):
     def go_travel(self):
         self.is_traveling = True
         if self.subordinates.all():
+            # Excluir a los q estan promocionados con Q ?
             selected = self.subordinates.order_by('-hired_date').first()
             selected.promote()
             if not self.traveling_data.get('substitute'):
@@ -124,7 +125,7 @@ class Employee(AbstractUser):
 
     def end_travel(self):
         self.is_traveling = False
-        if self.subordinates.filter(username=self.traveling_data['substitute']):
+        if self.traveling_data.get('substitute') and self.subordinates.filter(username=self.traveling_data['substitute']):
             self.subordinates.get(username=self.traveling_data['substitute']).unpromote()
         self.save()
 
