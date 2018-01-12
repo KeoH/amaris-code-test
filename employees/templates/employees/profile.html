@@ -3,7 +3,29 @@
 {% block title %}{{user.username}}'s profile{% endblock %}
 
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <h3>@{{ user.username }}</h3>
     <p>Departament: {{ user.get_departament_display }}</p>
     <p>Role: {{ user.get_role_display }}</p>
+    <div>
+        {% if user.subordinates.all %}
+            <h3>Subordinates</h3>
+            <div class="row">
+                {% for subordinate in user.subordinates.all %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ subordinate.first_name }} {{ subordinate.last_name }}</h5>
+                            <h6>@{{ subordinate.username }}</h6>
+                            <p>Departament: {{ subordinate.get_departament_display }}</p>
+                            <p>Role: {{ subordinate.get_role_display }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No subordinates</p>
+        {% endif %}
+    </div>
 {% endblock %}
